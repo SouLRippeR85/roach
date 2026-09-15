@@ -9,3 +9,10 @@ screenshots/
 .DS_Store
 dist/
 .output/
+.grok/*
+!.grok/app-env.json
+AGENTS.md
+AGENTS.project.md
+startup.sh
+.node_modules.lock
+.project_id
