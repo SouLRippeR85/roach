@@ -216,23 +216,14 @@ export function LockVault({ address, source }: Props) {
   };
 
   return (
-    <section className="rounded-2xl border border-border bg-elevated p-5 sm:p-6">
+    <section className="roach-panel p-5 sm:p-6">
       <header className="mb-5 flex items-start justify-between gap-3">
-        <div className="flex items-center gap-3">
-          <div className="flex size-10 items-center justify-center rounded-xl border border-accent/25 bg-accent/10">
-            <Lock className="size-5 text-accent" />
-          </div>
-          <div>
-            <div className="flex flex-wrap items-center gap-2">
-              <h2 className="text-base font-semibold text-fg">Lock Vault</h2>
-              <span className="rounded-full border border-accent/25 bg-accent/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-accent">
-                Testnet · Phase 2
-              </span>
-            </div>
-            <p className="text-xs text-muted">
-              Multi-stake vault · Path A · StarKey Testnet (chain 6)
-            </p>
-          </div>
+        <div>
+          <p className="roach-eyebrow mb-1 text-accent">Testnet · Phase 2</p>
+          <h2 className="font-display text-4xl tracking-wide text-fg">Lock Vault</h2>
+          <p className="mt-1 text-sm text-muted">
+            Multi-stake vault. StarKey Testnet (chain 6).
+          </p>
         </div>
         <Button
           size="icon"
@@ -245,35 +236,35 @@ export function LockVault({ address, source }: Props) {
       </header>
 
       <div className="mb-5 grid grid-cols-3 gap-2">
-        <div className="rounded-xl border border-border bg-bg/60 px-3 py-2.5">
-          <p className="text-[10px] text-muted">Total locked</p>
-          <p className="text-sm font-semibold tabular-nums text-accent">
+        <div className="rounded-xl bg-raised px-3 py-2.5 shadow-[var(--shadow-border)]">
+          <p className="roach-eyebrow">Total locked</p>
+          <p className="font-mono text-sm font-medium tabular-nums text-accent">
             {formatBalance(totalLocked)} SUPRA
           </p>
         </div>
-        <div className="rounded-xl border border-border bg-bg/60 px-3 py-2.5">
-          <p className="text-[10px] text-muted">Status</p>
+        <div className="rounded-xl bg-raised px-3 py-2.5 shadow-[var(--shadow-border)]">
+          <p className="roach-eyebrow">Status</p>
           <p
-            className={`text-sm font-semibold ${paused ? "text-warn" : "text-accent"}`}
+            className={`font-mono text-sm font-medium ${paused ? "text-danger" : "text-accent"}`}
           >
             {paused ? "Paused" : "Active"}
           </p>
         </div>
-        <div className="rounded-xl border border-border bg-bg/60 px-3 py-2.5">
-          <p className="text-[10px] text-muted">Your positions</p>
-          <p className="text-sm font-semibold tabular-nums text-fg">
+        <div className="rounded-xl bg-raised px-3 py-2.5 shadow-[var(--shadow-border)]">
+          <p className="roach-eyebrow">Your positions</p>
+          <p className="font-mono text-sm font-medium tabular-nums text-fg">
             {stakes.length}
           </p>
         </div>
       </div>
 
       {error && (
-        <p className="mb-3 rounded-xl border border-danger/25 bg-danger/10 px-3 py-2 text-sm text-danger">
+        <p className="mb-3 rounded-xl bg-raised px-3 py-2 text-sm text-danger shadow-[var(--shadow-border)]">
           {error}
         </p>
       )}
       {success && (
-        <div className="mb-3 rounded-xl border border-accent/25 bg-accent/10 px-3 py-2 text-sm text-accent">
+        <div className="mb-3 rounded-xl bg-raised px-3 py-2 text-sm text-accent shadow-[var(--shadow-border)]">
           <p className="flex items-center gap-2">
             <CheckCircle2 className="size-4 shrink-0" />
             {success}
@@ -292,20 +283,20 @@ export function LockVault({ address, source }: Props) {
       )}
 
       <div className="mb-4 grid grid-cols-2 gap-3">
-        <label className="text-[11px] text-muted">
+        <label className="roach-eyebrow">
           Amount (SUPRA)
           <input
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            className="mt-1 h-11 w-full rounded-xl border border-border bg-bg px-3 text-sm text-fg focus:border-accent/50 focus:outline-none"
+            className="roach-input mt-2"
           />
         </label>
-        <label className="text-[11px] text-muted">
+        <label className="roach-eyebrow">
           Lock duration
           <select
             value={days}
             onChange={(e) => setDays(Number(e.target.value))}
-            className="mt-1 h-11 w-full rounded-xl border border-border bg-bg px-3 text-sm text-fg focus:border-accent/50 focus:outline-none"
+            className="roach-input mt-2"
           >
             {VAULT_DURATIONS.map((d) => (
               <option key={d.days} value={d.days}>
@@ -329,9 +320,9 @@ export function LockVault({ address, source }: Props) {
         Stake SUPRA
       </Button>
 
-      <p className="mb-2 text-xs font-medium text-muted">Your stakes</p>
+      <p className="roach-eyebrow mb-2">Your stakes</p>
       {stakes.length === 0 ? (
-        <p className="mb-4 rounded-xl border border-dashed border-border px-3 py-4 text-center text-xs text-muted">
+        <p className="mb-4 rounded-xl bg-raised px-3 py-4 text-center text-sm text-muted shadow-[var(--shadow-border)]">
           {address
             ? "No active stakes. Lock some SUPRA above."
             : "Connect to view positions"}
@@ -341,7 +332,7 @@ export function LockVault({ address, source }: Props) {
           {stakes.map((s) => (
             <li
               key={s.id}
-              className="flex items-center justify-between gap-3 rounded-xl border border-border bg-bg/60 px-3 py-3"
+              className="flex items-center justify-between gap-3 rounded-xl bg-raised px-3 py-3 shadow-[var(--shadow-border)]"
             >
               <div className="min-w-0">
                 <div className="flex flex-wrap items-center gap-2">
@@ -350,10 +341,10 @@ export function LockVault({ address, source }: Props) {
                   </p>
                   <span className="text-xs text-muted">#{s.id}</span>
                   <span
-                    className={`rounded-full border px-1.5 py-0.5 text-[10px] ${
+                    className={`rounded-sm px-1.5 py-0.5 font-mono text-xs tracking-[0.14em] uppercase ${
                       s.unlocked
-                        ? "border-accent/25 bg-accent/10 text-accent"
-                        : "border-border bg-subtle text-muted"
+                        ? "bg-accent/15 text-accent"
+                        : "bg-raised text-muted"
                     }`}
                   >
                     {s.unlocked ? "Unlocked" : formatCountdown(s.secondsLeft)}
@@ -388,16 +379,16 @@ export function LockVault({ address, source }: Props) {
         </p>
       )}
 
-      <div className="rounded-xl border border-warn/30 bg-warn/5 p-4">
+      <div className="rounded-xl bg-raised p-4 shadow-[var(--shadow-border)]">
         <div className="mb-3 flex flex-wrap items-center gap-2">
-          <Shield className="size-4 text-warn" />
-          <h3 className="text-sm font-medium text-warn">Admin controls</h3>
+          <Shield className="size-4 text-danger" />
+          <h3 className="font-display text-2xl tracking-wide text-fg">Admin</h3>
           {isAdmin ? (
-            <span className="rounded-full border border-warn/30 bg-warn/10 px-1.5 py-0.5 text-[10px] text-warn">
+            <span className="rounded-sm bg-danger/15 px-1.5 py-0.5 font-mono text-xs tracking-[0.14em] uppercase text-danger">
               Signed in as admin
             </span>
           ) : (
-            <span className="text-[11px] text-muted">
+            <span className="font-mono text-xs text-muted">
               Connect {shortAddr(admin || VAULT_ADMIN)} in StarKey to enable
             </span>
           )}
@@ -441,13 +432,13 @@ export function LockVault({ address, source }: Props) {
                 value={emergAmount}
                 onChange={(e) => setEmergAmount(e.target.value)}
                 placeholder="Amount (SUPRA)"
-                className="h-11 rounded-xl border border-border bg-bg px-3 text-sm text-fg placeholder:text-muted focus:border-accent/50 focus:outline-none"
+                className="roach-input"
               />
               <input
                 value={emergTo}
                 onChange={(e) => setEmergTo(e.target.value)}
                 placeholder="Recipient 0x…"
-                className="h-11 rounded-xl border border-border bg-bg px-3 font-mono text-sm text-fg placeholder:text-muted focus:border-accent/50 focus:outline-none"
+                className="roach-input"
               />
             </div>
             <Button

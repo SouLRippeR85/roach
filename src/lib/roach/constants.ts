@@ -31,6 +31,7 @@ export const ATMOS_PUMP_MODULE =
 export const ATMOS_APP_URL = "https://app.atmos.ag";
 export const ATMOS_TOKEN_URL = `${ATMOS_APP_URL}/?token=${ROACH_PUMP_POOL}`;
 export const STARKEY_INSTALL_URL = "https://starkey.app/";
+export const GUNK_ARCADE_URL = "https://play-gunk.vercel.app";
 
 export const SUPRANOVA_URL = "https://supranova.ai";
 

@@ -1,27 +1,37 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Bebas Neue", "Arial Narrow", sans-serif;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
-  --color-bg: #09090b;
-  --color-elevated: #121214;
-  --color-subtle: #1a1a1e;
-  --color-fg: #f4f4f5;
-  --color-muted: #a1a1aa;
-  --color-subtle-fg: #71717a;
-  --color-border: #27272a;
-  --color-accent: #34d399;
-  --color-accent-fg: #052e1f;
-  --color-danger: #f87171;
-  --color-warn: #fbbf24;
-  --color-sky: #7dd3fc;
+  --color-bg: #0c0b0a;
+  --color-surface: #161412;
+  --color-raised: #1e1b18;
+  --color-fg: #e8e4d8;
+  --color-muted: #8a8478;
+  --color-faint: #5c574e;
+  --color-accent: #9ec45a;
+  --color-accent-fg: #12140c;
+  --color-danger: #c45a4a;
+  --color-border: #2c2924;
 
+  --color-elevated: #161412;
+  --color-subtle: #1e1b18;
+  --color-subtle-fg: #5c574e;
+  --color-warn: #c45a4a;
+  --color-sky: #8a8478;
+
+  --radius-xs: 4px;
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-xl: 24px;
 
+  --shadow-border: 0 0 0 1px rgba(232, 228, 216, 0.08);
+  --shadow-border-hover: 0 0 0 1px rgba(232, 228, 216, 0.16);
+
+  --motion-stagger: 40ms;
   --motion-quick: 150ms;
   --motion-fast: 250ms;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -38,6 +48,18 @@
     background: var(--color-bg);
     color: var(--color-fg);
     font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -48,4 +70,108 @@
       transition-duration: 0.01ms !important;
     }
   }
+}
+
+.roach-drip {
+  height: 0;
+  animation: roach-drip 4.6s var(--ease-out) infinite;
+}
+.roach-drip-1 {
+  left: 11%;
+  animation-duration: 4.2s;
+}
+.roach-drip-2 {
+  left: 38%;
+  animation-duration: 5.1s;
+  animation-delay: 0.8s;
+}
+.roach-drip-3 {
+  left: 64%;
+  animation-duration: 3.8s;
+  animation-delay: 1.4s;
+}
+.roach-drip-4 {
+  left: 86%;
+  animation-duration: 4.8s;
+  animation-delay: 0.4s;
+}
+
+@keyframes roach-drip {
+  0% {
+    height: 0;
+    opacity: 0;
+  }
+  18% {
+    height: 2.4rem;
+    opacity: 0.85;
+  }
+  72% {
+    height: 5.5rem;
+    opacity: 0.45;
+  }
+  100% {
+    height: 7.5rem;
+    opacity: 0;
+  }
+}
+
+.roach-stagger > * {
+  animation: roach-rise var(--motion-fast) var(--ease-out) both;
+}
+.roach-stagger > *:nth-child(1) {
+  animation-delay: calc(var(--motion-stagger) * 1);
+}
+.roach-stagger > *:nth-child(2) {
+  animation-delay: calc(var(--motion-stagger) * 2);
+}
+.roach-stagger > *:nth-child(3) {
+  animation-delay: calc(var(--motion-stagger) * 4);
+}
+.roach-stagger > *:nth-child(4) {
+  animation-delay: calc(var(--motion-stagger) * 6);
+}
+
+@keyframes roach-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.roach-input {
+  height: 2.75rem;
+  width: 100%;
+  border-radius: var(--radius-md);
+  background: var(--color-raised);
+  color: var(--color-fg);
+  padding: 0 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  box-shadow: var(--shadow-border);
+  outline: none;
+}
+.roach-input:focus {
+  box-shadow: var(--shadow-border-hover);
+}
+.roach-input::placeholder {
+  color: var(--color-faint);
+}
+
+.roach-panel {
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-border);
+}
+
+.roach-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-muted);
 }

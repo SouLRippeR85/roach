@@ -5,7 +5,6 @@ import {
   Flame,
   Loader2,
   Shield,
-  Trash2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -240,19 +239,15 @@ export function DustCleaner({ address, source, supraPrice }: Props) {
   }, [burning, progress, selectedDust, selectedSupra, burnMode]);
 
   return (
-    <section className="min-w-0 rounded-2xl border border-border bg-elevated p-5 sm:p-6">
-      <header className="mb-5 flex items-start gap-3">
-        <div className="flex size-10 items-center justify-center rounded-xl border border-danger/25 bg-danger/10">
-          <Trash2 className="size-5 text-danger" />
-        </div>
-        <div className="min-w-0">
-          <h2 className="text-base font-semibold text-fg">Dust Cleaner</h2>
-          <p className="text-xs text-muted">
-            Graduated ROACH is never dust · burn junk · send bridged home
-            {source === "demo" ? " · colony preview" : " · StarKey"}
-            {supraPrice ? ` · SUPRA ≈ $${supraPrice.toFixed(6)}` : ""}
-          </p>
-        </div>
+    <section className="roach-panel min-w-0 p-5 sm:p-6">
+      <header className="mb-5">
+        <p className="roach-eyebrow mb-1 text-danger">Burn junk</p>
+        <h2 className="font-display text-4xl tracking-wide text-fg">Dust Cleaner</h2>
+        <p className="mt-2 text-sm leading-relaxed text-muted">
+          Graduated ROACH is never dust. Burn junk. Send bridged home.
+          {source === "demo" ? " Colony preview." : " StarKey live."}
+          {supraPrice ? ` SUPRA ≈ $${supraPrice.toFixed(6)}` : ""}
+        </p>
       </header>
 
       <p className="mb-3 truncate font-mono text-xs text-muted">{address}</p>
@@ -274,13 +269,13 @@ export function DustCleaner({ address, source, supraPrice }: Props) {
       </Button>
 
       {error && (
-        <p className="mt-3 rounded-xl border border-danger/25 bg-danger/10 px-3 py-2 text-sm text-danger">
+        <p className="mt-3 rounded-xl bg-raised px-3 py-2 text-sm text-danger shadow-[var(--shadow-border)]">
           {error}
         </p>
       )}
 
       {success && (
-        <div className="mt-3 rounded-xl border border-accent/25 bg-accent/10 px-3 py-2 text-sm text-accent">
+        <div className="mt-3 rounded-xl bg-raised px-3 py-2 text-sm text-accent shadow-[var(--shadow-border)]">
           <p className="flex items-center gap-2">
             <CheckCircle2 className="size-4 shrink-0" />
             {success}
@@ -301,10 +296,10 @@ export function DustCleaner({ address, source, supraPrice }: Props) {
 
       {scanning && tokens.length === 0 && (
         <div className="mt-5 space-y-2">
-          <div className="h-16 animate-pulse rounded-xl border border-border bg-subtle" />
-          <div className="h-16 animate-pulse rounded-xl border border-border bg-subtle" />
-          <p className="text-center text-[11px] text-muted">
-            Scanning Testnet + mainnet…
+          <div className="h-16 animate-pulse rounded-xl bg-raised" />
+          <div className="h-16 animate-pulse rounded-xl bg-raised" />
+          <p className="text-center font-mono text-xs tracking-[0.16em] text-faint uppercase">
+            Scanning Testnet + mainnet
           </p>
         </div>
       )}
@@ -317,7 +312,7 @@ export function DustCleaner({ address, source, supraPrice }: Props) {
               <Chip tone="danger">{dustTokens.length} dust</Chip>
             )}
             {bridgedTokens.length > 0 && (
-              <Chip tone="sky">{bridgedTokens.length} bridged</Chip>
+              <Chip>{bridgedTokens.length} bridged</Chip>
             )}
             {supraTokens.length > 0 && <Chip tone="accent">SUPRA</Chip>}
             {keepTokens.length > 0 && <Chip tone="accent">ROACH keep</Chip>}
@@ -353,7 +348,7 @@ export function DustCleaner({ address, source, supraPrice }: Props) {
                     href={ATMOS_TOKEN_URL}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex h-11 items-center rounded-xl border border-accent/25 bg-accent/10 px-3 text-xs font-medium text-accent hover:bg-accent/15"
+                    className="inline-flex h-11 items-center rounded-md bg-raised px-3 text-xs font-medium text-accent shadow-[var(--shadow-border)] hover:shadow-[var(--shadow-border-hover)]"
                   >
                     Trade ROACH on Atmos
                     <ArrowUpRight className="ml-1 size-3" />
@@ -413,7 +408,7 @@ export function DustCleaner({ address, source, supraPrice }: Props) {
                 </Button>
               </div>
               {burnMode === "full" && (
-                <label className="flex cursor-pointer items-start gap-2 rounded-xl border border-warn/30 bg-warn/10 p-3 text-xs text-warn">
+                <label className="flex cursor-pointer items-start gap-2 rounded-xl bg-raised p-3 text-xs text-danger shadow-[var(--shadow-border)]">
                   <input
                     type="checkbox"
                     className="mt-0.5"
@@ -440,7 +435,7 @@ export function DustCleaner({ address, source, supraPrice }: Props) {
             )}
             {burnLabel}
           </Button>
-          <p className="text-center text-[11px] text-muted">
+          <p className="text-center font-mono text-xs tracking-[0.12em] text-faint">
             Dust burns to the ROACH burn address. Graduated ROACH never burns
             here. Bridged assets use send_tokens, or{" "}
             <a
@@ -464,20 +459,16 @@ function Chip({
   tone,
 }: {
   children: ReactNode;
-  tone?: "danger" | "sky" | "accent";
+  tone?: "danger" | "accent";
 }) {
   const cls =
     tone === "danger"
-      ? "border-danger/25 bg-danger/10 text-danger"
-      : tone === "sky"
-        ? "border-sky/25 bg-sky/10 text-sky"
-        : tone === "accent"
-          ? "border-accent/25 bg-accent/10 text-accent"
-          : "border-border bg-subtle text-muted";
+      ? "bg-danger/15 text-danger"
+      : tone === "accent"
+        ? "bg-accent/15 text-accent"
+        : "bg-raised text-muted";
   return (
-    <span
-      className={`rounded-full border px-2 py-0.5 text-[11px] font-medium ${cls}`}
-    >
+    <span className={`rounded-sm px-2 py-0.5 font-mono text-xs tracking-[0.14em] uppercase ${cls}`}>
       {children}
     </span>
   );
@@ -495,12 +486,10 @@ function TokenRow({
   const selectable = token.kind === "dust" || token.kind === "supra";
   const badge =
     token.kind === "dust"
-      ? "border-danger/25 bg-danger/10 text-danger"
-      : token.kind === "bridged"
-        ? "border-sky/25 bg-sky/10 text-sky"
-        : token.kind === "keep"
-          ? "border-accent/25 bg-accent/10 text-accent"
-          : "border-border bg-subtle text-muted";
+      ? "bg-danger/15 text-danger"
+      : token.kind === "keep"
+        ? "bg-accent/15 text-accent"
+        : "bg-raised text-muted";
   const label =
     token.kind === "dust"
       ? "dust"
@@ -511,7 +500,7 @@ function TokenRow({
           : "native";
 
   return (
-    <div className="flex items-start gap-3 rounded-xl border border-border bg-bg/60 p-3">
+    <div className="flex items-start gap-3 rounded-xl bg-raised p-3 shadow-[var(--shadow-border)]">
       {selectable ? (
         <input
           type="checkbox"
@@ -529,15 +518,15 @@ function TokenRow({
             <p className="text-xs text-muted">{token.name}</p>
           )}
           <span
-            className={`rounded border px-1.5 py-0.5 text-[10px] uppercase tracking-wide ${badge}`}
+            className={`rounded-sm px-1.5 py-0.5 font-mono text-xs tracking-[0.14em] uppercase ${badge}`}
           >
             {label}
           </span>
           <span
-            className={`rounded border px-1.5 py-0.5 text-[10px] uppercase tracking-wide ${
+            className={`rounded-sm px-1.5 py-0.5 font-mono text-xs tracking-[0.14em] uppercase ${
               token.network === "testnet"
-                ? "border-warn/30 bg-warn/10 text-warn"
-                : "border-border bg-subtle text-muted"
+                ? "bg-danger/15 text-danger"
+                : "bg-raised text-muted"
             }`}
           >
             {token.network === "testnet" ? "test" : "main"}

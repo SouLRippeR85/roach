@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BarChart3, ExternalLink, Loader2, RefreshCw } from "lucide-react";
+import { ExternalLink, Loader2, RefreshCw } from "lucide-react";
 import {
   ATMOS_APP_URL,
   ATMOS_TOKEN_URL,
@@ -61,18 +61,14 @@ export function TokenStats() {
     : "Bonding";
 
   return (
-    <section className="rounded-2xl border border-border bg-elevated p-5 sm:p-6">
-      <header className="mb-5 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="flex size-10 items-center justify-center rounded-xl border border-accent/25 bg-accent/10">
-            <BarChart3 className="size-5 text-accent" />
-          </div>
-          <div>
-            <h2 className="text-base font-semibold text-fg">Token Stats</h2>
-            <p className="text-xs text-muted">
-              {stats?.name || "ROACH"} on Atmos Hyper AMM
-            </p>
-          </div>
+    <section className="roach-panel p-5 sm:p-6">
+      <header className="mb-5 flex items-start justify-between gap-3">
+        <div>
+          <p className="roach-eyebrow mb-1 text-accent">Atmos</p>
+          <h2 className="font-display text-4xl tracking-wide text-fg">Token Stats</h2>
+          <p className="mt-1 text-sm text-muted">
+            {stats?.name || "ROACH"} on Hyper AMM
+          </p>
         </div>
         <Button
           size="icon"
@@ -102,7 +98,7 @@ export function TokenStats() {
         href={ATMOS_TOKEN_URL}
         target="_blank"
         rel="noreferrer"
-        className="mb-2 flex h-11 items-center justify-between rounded-xl border border-accent/25 bg-accent/10 px-4 text-sm text-accent hover:bg-accent/15"
+        className="mb-2 flex h-11 items-center justify-between rounded-md bg-raised px-4 text-sm text-accent shadow-[var(--shadow-border)] hover:shadow-[var(--shadow-border-hover)]"
       >
         Trade ROACH on Atmos
         <ExternalLink className="size-4" />
@@ -111,7 +107,7 @@ export function TokenStats() {
         href={explorerAddress(ROACH_FA_METADATA)}
         target="_blank"
         rel="noreferrer"
-        className="mb-2 flex h-11 items-center justify-between rounded-xl border border-border bg-subtle px-4 text-sm text-fg hover:bg-elevated"
+        className="mb-2 flex h-11 items-center justify-between rounded-md bg-raised px-4 text-sm text-fg shadow-[var(--shadow-border)] hover:shadow-[var(--shadow-border-hover)]"
       >
         View FA on Suprascan
         <ExternalLink className="size-4 text-muted" />
@@ -120,13 +116,13 @@ export function TokenStats() {
         href={explorerAddress(ROACH_BURN_ADDRESS)}
         target="_blank"
         rel="noreferrer"
-        className="flex h-11 items-center justify-between rounded-xl border border-border bg-subtle px-4 text-sm text-fg hover:bg-elevated"
+        className="flex h-11 items-center justify-between rounded-md bg-raised px-4 text-sm text-fg shadow-[var(--shadow-border)] hover:shadow-[var(--shadow-border-hover)]"
       >
         View burn address
         <ExternalLink className="size-4 text-muted" />
       </a>
       {updated && (
-        <p className="mt-4 text-center text-[11px] text-muted">
+        <p className="mt-4 text-center font-mono text-xs tracking-[0.12em] text-faint">
           Last updated: {updated} · {ATMOS_APP_URL.replace("https://", "")}
         </p>
       )}
@@ -144,10 +140,10 @@ function Stat({
   accent?: boolean;
 }) {
   return (
-    <div className="rounded-xl border border-border bg-bg/60 p-4">
-      <p className="mb-1 text-xs text-muted">{label}</p>
+    <div className="rounded-xl bg-raised p-4 shadow-[var(--shadow-border)]">
+      <p className="roach-eyebrow mb-1">{label}</p>
       <p
-        className={`text-sm font-medium tabular-nums ${accent ? "text-accent" : "text-fg"}`}
+        className={`font-mono text-sm font-medium tabular-nums ${accent ? "text-accent" : "text-fg"}`}
       >
         {value}
       </p>

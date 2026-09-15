@@ -74,30 +74,30 @@ export function SendHome({ token, address, source, onDone, onError }: Props) {
   };
 
   return (
-    <div className="mt-3 space-y-3 rounded-xl border border-sky/25 bg-sky/5 p-3">
-      <p className="text-xs text-muted">
+    <div className="mt-3 space-y-3 rounded-xl bg-raised p-3 shadow-[var(--shadow-border)]">
+      <p className="text-sm leading-relaxed text-muted">
         Phase B calls{" "}
-        <span className="font-mono text-fg/80">
+        <span className="font-mono text-fg">
           token_bridge_service::send_tokens
         </span>{" "}
         on Supra. The wrapped FA is burned; the original is released on
         Ethereum. Not a ROACH burn.
       </p>
-      <label className="block text-[11px] font-medium text-muted">
+      <label className="roach-eyebrow block">
         Ethereum recipient
         <input
           value={evm}
           onChange={(e) => setEvm(e.target.value)}
           placeholder="0x…"
-          className="mt-1 h-11 w-full rounded-lg border border-border bg-bg px-3 font-mono text-sm text-fg placeholder:text-muted focus:border-accent/50 focus:outline-none"
+          className="roach-input mt-2"
         />
       </label>
-      <label className="block text-[11px] font-medium text-muted">
+      <label className="roach-eyebrow block">
         Amount ({token.symbol})
         <input
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
-          className="mt-1 h-11 w-full rounded-lg border border-border bg-bg px-3 font-mono text-sm text-fg focus:border-accent/50 focus:outline-none"
+          className="roach-input mt-2"
         />
       </label>
       {token.symbol === "supETH" && (
